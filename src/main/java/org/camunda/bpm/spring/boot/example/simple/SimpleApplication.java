@@ -97,7 +97,7 @@ public class SimpleApplication implements CommandLineRunner {
     }
 
     if (isProcessInstanceFinished()) {
-      logger.info("processinstance ended!");
+    //  logger.info("processinstance ended!");
 
       if (exitWhenFinished) {
         CompletableFuture.runAsync(() -> SpringApplication.exit(context, () -> 0));
