@@ -12,18 +12,11 @@
       <bpmn:outgoing>Flow_1z1077o</bpmn:outgoing>
       <bpmn:script>print("Hello, This is from BPMN Script");</bpmn:script>
     </bpmn:scriptTask>
-    <bpmn:endEvent id="Event_1eq0zmu">
-      <bpmn:incoming>Flow_0ip97gj</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:userTask id="Activity_06c5mr3">
-      <bpmn:incoming>Flow_1sala4d</bpmn:incoming>
-      <bpmn:outgoing>Flow_0ip97gj</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:scriptTask id="Activity_1v3agld" name="ExternalScriptTask" scriptFormat="JavaScript" camunda:resource="external_script.js">
       <bpmn:incoming>Flow_1z1077o</bpmn:incoming>
       <bpmn:outgoing>Flow_1dhexbu</bpmn:outgoing>
     </bpmn:scriptTask>
-    <bpmn:serviceTask id="Activity_1jvm46k" name="TestJavaClassTask" camunda:class="org.camunda.bpm.spring.boot.example.simple.kumar.service.TestJavaClassExample">
+    <bpmn:serviceTask id="Activity_1jvm46k" name="TestJavaClassTask" camunda:class="org.camunda.bpm.spring.boot.example.simple.kumar.delegates.TestJavaClassExample">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="City">${"Bangalore"}</camunda:inputParameter>
@@ -45,14 +38,26 @@
     <bpmn:sequenceFlow id="Flow_1poqu54" sourceRef="StartEvent_1" targetRef="Activity_07glm4z" />
     <bpmn:sequenceFlow id="Flow_1z1077o" sourceRef="Activity_07glm4z" targetRef="Activity_1v3agld" />
     <bpmn:sequenceFlow id="Flow_0ip97gj" sourceRef="Activity_06c5mr3" targetRef="Event_1eq0zmu" />
-    <bpmn:sequenceFlow id="Flow_1sala4d" sourceRef="Activity_0vpxsbi" targetRef="Activity_06c5mr3" />
+    <bpmn:sequenceFlow id="Flow_1sala4d" sourceRef="Activity_0vpxsbi" targetRef="Activity_0a1d0gh" />
     <bpmn:sequenceFlow id="Flow_1dhexbu" sourceRef="Activity_1v3agld" targetRef="Activity_1jvm46k" />
     <bpmn:sequenceFlow id="Flow_1v428b2" sourceRef="Activity_1jvm46k" targetRef="Activity_0vpxsbi" />
+    <bpmn:endEvent id="Event_1eq0zmu">
+      <bpmn:incoming>Flow_0ip97gj</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Activity_06c5mr3">
+      <bpmn:incoming>Flow_0vdjug4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ip97gj</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0vdjug4" sourceRef="Activity_0a1d0gh" targetRef="Activity_06c5mr3" />
+    <bpmn:serviceTask id="Activity_0a1d0gh" name="TaskExpression" camunda:expression="${serviceTaskExpression.getMessage()}" camunda:resultVariable="Message">
+      <bpmn:incoming>Flow_1sala4d</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vdjug4</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_19jrjev">
       <bpmndi:BPMNShape id="Participant_05zjo7e_di" bpmnElement="Participant_05zjo7e" isHorizontal="true">
-        <dc:Bounds x="160" y="85" width="1460" height="255" />
+        <dc:Bounds x="160" y="85" width="1640" height="255" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
@@ -61,12 +66,6 @@
       <bpmndi:BPMNShape id="Activity_0oejz6q_di" bpmnElement="Activity_07glm4z">
         <dc:Bounds x="370" y="170" width="100" height="80" />
         <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1eq0zmu_di" bpmnElement="Event_1eq0zmu">
-        <dc:Bounds x="1302" y="192" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1dsdk22_di" bpmnElement="Activity_06c5mr3">
-        <dc:Bounds x="1170" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0llbpnf_di" bpmnElement="Activity_1v3agld">
         <dc:Bounds x="560" y="170" width="100" height="80" />
@@ -79,6 +78,16 @@
       <bpmndi:BPMNShape id="Activity_1tlljyo_di" bpmnElement="Activity_0vpxsbi">
         <dc:Bounds x="970" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1eq0zmu_di" bpmnElement="Event_1eq0zmu">
+        <dc:Bounds x="1482" y="192" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1dsdk22_di" bpmnElement="Activity_06c5mr3">
+        <dc:Bounds x="1350" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13urnsd_di" bpmnElement="Activity_0a1d0gh">
+        <dc:Bounds x="1140" y="170" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1poqu54_di" bpmnElement="Flow_1poqu54">
         <di:waypoint x="298" y="210" />
         <di:waypoint x="370" y="210" />
@@ -88,12 +97,12 @@
         <di:waypoint x="560" y="210" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ip97gj_di" bpmnElement="Flow_0ip97gj">
-        <di:waypoint x="1270" y="210" />
-        <di:waypoint x="1302" y="210" />
+        <di:waypoint x="1450" y="210" />
+        <di:waypoint x="1482" y="210" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1sala4d_di" bpmnElement="Flow_1sala4d">
         <di:waypoint x="1070" y="210" />
-        <di:waypoint x="1170" y="210" />
+        <di:waypoint x="1140" y="210" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1dhexbu_di" bpmnElement="Flow_1dhexbu">
         <di:waypoint x="660" y="210" />
@@ -102,6 +111,10 @@
       <bpmndi:BPMNEdge id="Flow_1v428b2_di" bpmnElement="Flow_1v428b2">
         <di:waypoint x="870" y="210" />
         <di:waypoint x="970" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vdjug4_di" bpmnElement="Flow_0vdjug4">
+        <di:waypoint x="1240" y="210" />
+        <di:waypoint x="1350" y="210" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
