@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1xfls1d" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.51.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.24.0">
+  <decision id="DishToPrepare" name="DishToPrepare" camunda:historyTimeToLive="5">
+    <decisionTable id="DecisionTable_061qy2w">
+      <input id="Input_1" label="Day Event">
+        <inputExpression id="InputExpression_1" typeRef="string" expressionLanguage="feel">
+          <text>dayEvent</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0fnoyaq" label="Number Of Guests">
+        <inputExpression id="LiteralExpression_0p3xfhz" typeRef="integer">
+          <text>guestCount</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Dish to be prepared" name="finalDishName" typeRef="string" />
+      <output id="OutputClause_0o8h6xx" label="Dish Status" name="DishStatus" typeRef="string" />
+      <rule id="DecisionRule_0m11fql">
+        <inputEntry id="UnaryTests_14b0d7x">
+          <text>"Breakfast"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1c9o7sd">
+          <text>&lt;= 5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gm0vro">
+          <text>"Dosa"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0dqigp5">
+          <text>"Finished"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_19rnjx0">
+        <inputEntry id="UnaryTests_0c5glck">
+          <text>"Breakfast"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l4f4o4">
+          <text>&gt; 5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fw9ljj">
+          <text>"Pongal"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1tx2csr">
+          <text>"Finished"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1s6vcl5">
+        <inputEntry id="UnaryTests_06v829y">
+          <text>"Lunch"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19o8vm6">
+          <text>&lt; 5 </text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17f6ii2">
+          <text>"Chicken Biryani"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09fv7ay">
+          <text>"InProgress"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1sf7pxq">
+        <inputEntry id="UnaryTests_0a67f1w">
+          <text>"Lunch"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1fn4kxr">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06xxqiu">
+          <text>"Rice, Chicken Curry"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0q62z4d">
+          <text>"Finished"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ep72sa">
+        <inputEntry id="UnaryTests_1b15ucp">
+          <text>"Dinner"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pinujw">
+          <text>&lt;=5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ekaygk">
+          <text>"Chapati, Veg Curry"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rb0le7">
+          <text>"InProgress"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0v7qwv2">
+        <description>As the number of guests are more, preparing Rice &amp; Sambar is easy</description>
+        <inputEntry id="UnaryTests_0f8tpit">
+          <text>"Dinner"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vdpgfw">
+          <text>&gt; 5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0cfu32y">
+          <text>"Rice, Sambar"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_17pwfhy">
+          <text>"InProgress"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="Decision_1rdk84t_di" dmnElementRef="DishToPrepare">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

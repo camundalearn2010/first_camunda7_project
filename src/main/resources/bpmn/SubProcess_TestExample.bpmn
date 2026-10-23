@@ -81,20 +81,6 @@ print('I am in Subprocess Task, Taking Payment  of Order : '  + ord);</bpmn:scri
       <bpmndi:BPMNShape id="Activity_1f2db3j_di" bpmnElement="Activity_0kso72a">
         <dc:Bounds x="750" y="460" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1unbssp_di" bpmnElement="Event_1unbssp">
-        <dc:Bounds x="1312" y="302" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0dgloqb_di" bpmnElement="Activity_0vwl1zs">
-        <dc:Bounds x="1160" y="280" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_197ywpg_di" bpmnElement="Event_197ywpg">
-        <dc:Bounds x="1182" y="482" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0u2b3cy_di" bpmnElement="Activity_17dugnt">
-        <dc:Bounds x="950" y="280" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_068dpji_di" bpmnElement="Activity_13g1s4o" isExpanded="true">
         <dc:Bounds x="475" y="220" width="405" height="200" />
       </bpmndi:BPMNShape>
@@ -116,6 +102,20 @@ print('I am in Subprocess Task, Taking Payment  of Order : '  + ord);</bpmn:scri
         <di:waypoint x="710" y="320" />
         <di:waypoint x="772" y="320" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1unbssp_di" bpmnElement="Event_1unbssp">
+        <dc:Bounds x="1312" y="302" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0dgloqb_di" bpmnElement="Activity_0vwl1zs">
+        <dc:Bounds x="1160" y="280" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_197ywpg_di" bpmnElement="Event_197ywpg">
+        <dc:Bounds x="1182" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u2b3cy_di" bpmnElement="Activity_17dugnt">
+        <dc:Bounds x="950" y="280" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0oo0ihu_di" bpmnElement="Event_0yzzu81">
         <dc:Bounds x="662" y="402" width="36" height="36" />
       </bpmndi:BPMNShape>
