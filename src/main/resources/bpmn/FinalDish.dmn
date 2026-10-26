@@ -99,6 +99,21 @@
           <text>"InProgress"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0aqa8wy">
+        <description>It  throws eror because of duplicate input validation on 2nd and 7th.</description>
+        <inputEntry id="UnaryTests_1b98hsg">
+          <text>"Breakfast"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1scktmt">
+          <text>&gt; 10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rvpoou">
+          <text>"Dosa1"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1xqxmzn">
+          <text>"Finished"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>

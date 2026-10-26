@@ -14,7 +14,7 @@
       <bpmn:outgoing>Flow_024q81o</bpmn:outgoing>
       <bpmn:script>print('Before DMN');
 execution.setVariable("dayEvent","Lunch");
-execution.setVariable("guestCount",8);</bpmn:script>
+execution.setVariable("guestCount",2);</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:sequenceFlow id="Flow_0qn76mf" sourceRef="Activity_0l6jalh" targetRef="Activity_00zqxxk" />
     <bpmn:sequenceFlow id="Flow_02z90mc" sourceRef="Activity_0u9eegq" targetRef="Event_0qkxm2l" />
@@ -34,10 +34,10 @@ print('Output Dish: '+ details);
 
 print('****');
 
-execution.setVariable("finalDishNameNew",DishDetails.get("finalDishName"));
-execution.setVariable("DishStatusNew",DishDetails.get("DishStatus"));</bpmn:script>
+//execution.setVariable("finalDishNameNew",DishDetails.get("finalDishName"));
+//execution.setVariable("DishStatusNew",DishDetails.get("DishStatus"));</bpmn:script>
     </bpmn:scriptTask>
-    <bpmn:businessRuleTask id="Activity_0l6jalh" name="Get The Final Dish to be prepared" camunda:resultVariable="DishDetails" camunda:decisionRef="DishToPrepare" camunda:mapDecisionResult="singleResult">
+    <bpmn:businessRuleTask id="Activity_0l6jalh" name="Get The Final Dish to be prepared" camunda:resultVariable="DishDetails" camunda:decisionRef="DishToPrepare_COLLECT">
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_024q81o</bpmn:incoming>
       <bpmn:outgoing>Flow_0qn76mf</bpmn:outgoing>
