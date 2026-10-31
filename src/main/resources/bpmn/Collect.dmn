@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0jcpmp1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.51.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.24.0">
+  <decision id="Decision_0vvob8i" name="Decision 1" camunda:historyTimeToLive="5">
+    <decisionTable id="DecisionTable_1azid2a" hitPolicy="COLLECT" aggregation="COUNT" biodi:annotationsWidth="454">
+      <input id="Input_1" label="Age">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Discount in %" typeRef="string" />
+      <rule id="DecisionRule_1y0a9qx">
+        <inputEntry id="UnaryTests_0geq0y9">
+          <text>&lt; 10 </text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1p12jb8">
+          <text>20</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0l0btmy">
+        <inputEntry id="UnaryTests_02tir3p">
+          <text>&lt; 20 </text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0du8h3f">
+          <text>10</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1pvmkcd">
+        <description>Collect(SUM) - if Age is 5; 1,2, 3 rules are satified; 20+10+5=35   Collect(MIN) - if Age is 5; 1,2, 3 rules are satified; 20,10,5= 5 Collect(MAX) - if Age is 5; 1,2, 3 rules are satified; 20,10,5= 20 Collect(COUNT) - if Age is 5; 1,2, 3 rules are satified; 20,10,5= 3</description>
+        <inputEntry id="UnaryTests_1msmwmn">
+          <text>&lt; 30 </text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1cn4zki">
+          <text>5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kqut2d">
+        <inputEntry id="UnaryTests_0chywst">
+          <text>[30..40]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0jj4fd1">
+          <text>5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0vpt6hk">
+        <inputEntry id="UnaryTests_1j2efzb">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1izm23y">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17vqwcy">
+        <inputEntry id="UnaryTests_094fd4k">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1i7z92s">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0eb0x31">
+        <inputEntry id="UnaryTests_0v868vy">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1a1uluj">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1gkghvl">
+        <inputEntry id="UnaryTests_0ufjgx8">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rzecvc">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17h04r3">
+        <inputEntry id="UnaryTests_1cye3c5">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17ystjp">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_04jwo85">
+        <inputEntry id="UnaryTests_0hv1w13">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1q1pdg3">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_016s0lg">
+        <inputEntry id="UnaryTests_1bch4q5">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0yq9r60">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="Decision_0vvob8i_di" dmnElementRef="Decision_0vvob8i">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
