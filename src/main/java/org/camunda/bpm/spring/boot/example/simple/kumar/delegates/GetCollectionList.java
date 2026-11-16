@@ -4,6 +4,7 @@ import java.sql.Array;
 import java.util.Arrays;
 import java.util.List;
 
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,13 @@ public class GetCollectionList implements JavaDelegate {
         execution.setVariable("VegCollectionVariableList", vegcollectionList);
         System.out.println("Collection Size: " + collectionList.size());
         System.out.println("Vegetable Collection Size: " + vegcollectionList.size());
+        try{
+
+        }
+        catch(Exception e){
+            System.out.println("Exception Occured: " + e.getMessage());
+            throw new BpmnError("GetCollectionListError", "Error in GetCollectionList Delegate: " + e.getMessage());
+        }
     }
 
 }

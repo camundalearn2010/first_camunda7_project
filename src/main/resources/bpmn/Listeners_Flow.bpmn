@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_12mqupd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.51.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.24.0">
+  <bpmn:collaboration id="Collaboration_1vubw4h">
+    <bpmn:participant id="Participant_0wlczdu" name="Listener Flow Sample" processRef="ListenerFlow" />
+  </bpmn:collaboration>
+  <bpmn:process id="ListenerFlow" name="ListenerFlow" isExecutable="true" camunda:historyTimeToLive="30">
+    <bpmn:extensionElements>
+      <camunda:executionListener event="start">
+        <camunda:script scriptFormat="JavaScript">print('STEP 1 - Start Process Execution')</camunda:script>
+      </camunda:executionListener>
+      <camunda:executionListener event="end">
+        <camunda:script scriptFormat="JavaScript">print('STEP 99 - End Process Level Execution')</camunda:script>
+      </camunda:executionListener>
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="JavaScript">print('STEP 2 - Start Event Execution')</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1ja596k</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:scriptTask id="Activity_1hfkqk4" name="Prepare Leave  Request" scriptFormat="JavaScript">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="JavaScript">print('STEP 3 - Before Starting Script Execution')</camunda:script>
+        </camunda:executionListener>
+        <camunda:executionListener event="end">
+          <camunda:script scriptFormat="JavaScript">print('STEP 4 - After Completing Script Execution');
+execution.setVariable("approver","");</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ja596k</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tpq4ht</bpmn:outgoing>
+      <bpmn:script>print ('From Script')</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_1ja596k" sourceRef="StartEvent_1" targetRef="Activity_1hfkqk4" />
+    <bpmn:sequenceFlow id="Flow_0tpq4ht" sourceRef="Activity_1hfkqk4" targetRef="Activity_1kh5p9e">
+      <bpmn:extensionElements />
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Activity_1kh5p9e" name="Manager Approval" camunda:assignee="${approver}">
+      <bpmn:extensionElements>
+        <camunda:taskListener event="create">
+          <camunda:script scriptFormat="JavaScript">print('STEP 5 - During CREATE Task Listner Event');
+task.getProcessEngineServices().getRuntimeService().setVariable(task.getProcessInstanceId(), "approver", "demo");
+task.setPriority(50);
+task.setDueDate(new Date(Date.now() + 24 * 60 * 60 * 1000));</camunda:script>
+        </camunda:taskListener>
+        <camunda:taskListener event="assignment">
+          <camunda:script scriptFormat="JavaScript">print('STEP 6 - During Task ASSIGNMENT Event Execution');</camunda:script>
+        </camunda:taskListener>
+        <camunda:taskListener event="update">
+          <camunda:script scriptFormat="JavaScript">print('STEP 7 - During Task UPDATE Event Execution');</camunda:script>
+        </camunda:taskListener>
+        <camunda:taskListener event="complete">
+          <camunda:script scriptFormat="JavaScript">print('STEP 8  During Task COMPLETE Event Execution');
+//task.getProcessEngineServices().getRuntimeService().setVariable(task.getProcessInstanceId(), "isApproved", true);</camunda:script>
+        </camunda:taskListener>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="JavaScript">print('STEP 4.1 - Executiong Start Event of User Task ');</camunda:script>
+        </camunda:executionListener>
+        <camunda:executionListener event="end">
+          <camunda:script scriptFormat="JavaScript">print('STEP 8 - Executiong End Event of User Task ');</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0tpq4ht</bpmn:incoming>
+      <bpmn:outgoing>Flow_0or0wyk</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0or0wyk" sourceRef="Activity_1kh5p9e" targetRef="Gateway_1sazjpw" />
+    <bpmn:endEvent id="Event_1f77mhq" name="Approved">
+      <bpmn:incoming>Flow_146kurd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1rzj0v5" sourceRef="Gateway_1sazjpw" targetRef="Activity_030gp6j">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isApproved == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Activity_030gp6j" name="Setup-  Out of Office Notification">
+      <bpmn:incoming>Flow_1rzj0v5</bpmn:incoming>
+      <bpmn:outgoing>Flow_146kurd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_146kurd" sourceRef="Activity_030gp6j" targetRef="Event_1f77mhq" />
+    <bpmn:sequenceFlow id="Flow_117m97d" sourceRef="Gateway_1sazjpw" targetRef="Event_0bvm3q0" />
+    <bpmn:endEvent id="Event_0bvm3q0" name="Rejected">
+      <bpmn:incoming>Flow_117m97d</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_1sazjpw" default="Flow_117m97d">
+      <bpmn:incoming>Flow_0or0wyk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rzj0v5</bpmn:outgoing>
+      <bpmn:outgoing>Flow_117m97d</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:boundaryEvent id="Event_1ic5sx7" attachedToRef="Activity_1kh5p9e">
+      <bpmn:outgoing>Flow_1p5ljwz</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_03alzc2">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P1D</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="Event_16vjyyu">
+      <bpmn:incoming>Flow_1p5ljwz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1p5ljwz" sourceRef="Event_1ic5sx7" targetRef="Event_16vjyyu" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1vubw4h">
+      <bpmndi:BPMNShape id="Participant_0wlczdu_di" bpmnElement="Participant_0wlczdu" isHorizontal="true">
+        <dc:Bounds x="132" y="85" width="948" height="313" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="192" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0v9ttek_di" bpmnElement="Activity_1hfkqk4">
+        <dc:Bounds x="320" y="170" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pcoms3_di" bpmnElement="Activity_1kh5p9e">
+        <dc:Bounds x="520" y="170" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1f77mhq_di" bpmnElement="Event_1f77mhq">
+        <dc:Bounds x="1012" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1006" y="235" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06zou94_di" bpmnElement="Activity_030gp6j">
+        <dc:Bounds x="820" y="170" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0bvm3q0_di" bpmnElement="Event_0bvm3q0">
+        <dc:Bounds x="1012" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1008" y="345" width="44" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1sazjpw_di" bpmnElement="Gateway_1sazjpw" isMarkerVisible="true">
+        <dc:Bounds x="675" y="185" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_16vjyyu_di" bpmnElement="Event_16vjyyu">
+        <dc:Bounds x="632" y="312" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14ngpr7_di" bpmnElement="Event_1ic5sx7">
+        <dc:Bounds x="542" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ja596k_di" bpmnElement="Flow_1ja596k">
+        <di:waypoint x="218" y="210" />
+        <di:waypoint x="320" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tpq4ht_di" bpmnElement="Flow_0tpq4ht">
+        <di:waypoint x="420" y="210" />
+        <di:waypoint x="520" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0or0wyk_di" bpmnElement="Flow_0or0wyk">
+        <di:waypoint x="620" y="210" />
+        <di:waypoint x="675" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rzj0v5_di" bpmnElement="Flow_1rzj0v5">
+        <di:waypoint x="725" y="210" />
+        <di:waypoint x="820" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_146kurd_di" bpmnElement="Flow_146kurd">
+        <di:waypoint x="920" y="210" />
+        <di:waypoint x="1012" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_117m97d_di" bpmnElement="Flow_117m97d">
+        <di:waypoint x="700" y="235" />
+        <di:waypoint x="700" y="320" />
+        <di:waypoint x="1012" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1p5ljwz_di" bpmnElement="Flow_1p5ljwz">
+        <di:waypoint x="560" y="268" />
+        <di:waypoint x="560" y="330" />
+        <di:waypoint x="632" y="330" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
