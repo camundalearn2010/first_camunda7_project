@@ -1,0 +1,75 @@
+{
+  "components": [
+    {
+      "label": "Employee Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0c971ec",
+        "columns": null
+      },
+      "id": "Field_01652at",
+      "key": "employeeName"
+    },
+    {
+      "label": "Number of Leaves",
+      "type": "number",
+      "layout": {
+        "row": "Row_1gtturq",
+        "columns": null
+      },
+      "id": "Field_0utr0es",
+      "key": "leave_days"
+    },
+    {
+      "label": "Approved ?",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0mmwm60",
+        "columns": null
+      },
+      "id": "Field_0f709fy",
+      "key": "manager_approved"
+    },
+    {
+      "subtype": "date",
+      "dateLabel": "Leave Applied Date",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_0d3ddzd",
+        "columns": null
+      },
+      "id": "Field_1mctdot",
+      "key": "leavedate",
+      "description": "This field is used for getting Date"
+    },
+    {
+      "label": "Checkbox",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1xapdeg",
+        "columns": null
+      },
+      "id": "Field_1r0o28r",
+      "key": "checkbox_jymtvr"
+    },
+    {
+      "label": "Button",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_09l1pts",
+        "columns": null
+      },
+      "id": "Field_10cxkfb"
+    }
+  ],
+  "type": "default",
+  "id": "Leave_Form",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.51.1"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.24.0",
+  "schemaVersion": 19
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_ExternalWorkerExample" targetNamespace="http://camunda.org/schema/1.0/bpmn" exporter="Camunda Modeler" exporterVersion="5.51.1">
+  <bpmn:process id="ExternalWorkerExample" name="External worker example" isExecutable="true" camunda:historyTimeToLive="P180D">
+    <bpmn:startEvent id="StartEvent">
+      <bpmn:outgoing>Flow_Start_To_Greeting</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="ExternalTask_Greeting" name="Create greeting" camunda:type="external" camunda:topic="greet-customer">
+      <bpmn:incoming>Flow_0pf0kak</bpmn:incoming>
+      <bpmn:outgoing>Flow_Greeting_To_End</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent">
+      <bpmn:incoming>Flow_11g5gfe</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Start_To_Greeting" sourceRef="StartEvent" targetRef="Activity_0cxpqst" />
+    <bpmn:sequenceFlow id="Flow_Greeting_To_End" sourceRef="ExternalTask_Greeting" targetRef="Activity_0iooufa" />
+    <bpmn:sequenceFlow id="Flow_0pf0kak" sourceRef="Activity_0cxpqst" targetRef="ExternalTask_Greeting" />
+    <bpmn:userTask id="Activity_0cxpqst">
+      <bpmn:incoming>Flow_Start_To_Greeting</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pf0kak</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_0iooufa">
+      <bpmn:incoming>Flow_Greeting_To_End</bpmn:incoming>
+      <bpmn:outgoing>Flow_11g5gfe</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_11g5gfe" sourceRef="Activity_0iooufa" targetRef="EndEvent" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_ExternalWorkerExample">
+    <bpmndi:BPMNPlane id="BPMNPlane_ExternalWorkerExample" bpmnElement="ExternalWorkerExample">
+      <bpmndi:BPMNShape id="StartEvent_di" bpmnElement="StartEvent">
+        <dc:Bounds x="160" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_di" bpmnElement="EndEvent">
+        <dc:Bounds x="642" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExternalTask_Greeting_di" bpmnElement="ExternalTask_Greeting">
+        <dc:Bounds x="365" y="120" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_170pkhf_di" bpmnElement="Activity_0cxpqst">
+        <dc:Bounds x="230" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1h289ac" bpmnElement="Activity_0iooufa">
+        <dc:Bounds x="510" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_Start_To_Greeting_di" bpmnElement="Flow_Start_To_Greeting">
+        <di:waypoint x="196" y="160" />
+        <di:waypoint x="230" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Greeting_To_End_di" bpmnElement="Flow_Greeting_To_End">
+        <di:waypoint x="475" y="160" />
+        <di:waypoint x="510" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pf0kak_di" bpmnElement="Flow_0pf0kak">
+        <di:waypoint x="330" y="160" />
+        <di:waypoint x="365" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11g5gfe_di" bpmnElement="Flow_11g5gfe">
+        <di:waypoint x="610" y="160" />
+        <di:waypoint x="642" y="160" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

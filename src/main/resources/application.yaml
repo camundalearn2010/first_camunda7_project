@@ -25,6 +25,11 @@ camunda:
       enabled: false
       db-reporter-activate: false
 
+demo:
+  external-worker:
+    enabled: true
+    base-url: http://localhost:8010/engine-rest
+    topic: greet-customer
 
 #camunda.bpm.auto-deployment-enabled: false
 

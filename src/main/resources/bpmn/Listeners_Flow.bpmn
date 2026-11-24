@@ -54,7 +54,7 @@ task.setDueDate(new Date(Date.now() + 24 * 60 * 60 * 1000));</camunda:script>
         </camunda:taskListener>
         <camunda:taskListener event="complete">
           <camunda:script scriptFormat="JavaScript">print('STEP 8  During Task COMPLETE Event Execution');
-//task.getProcessEngineServices().getRuntimeService().setVariable(task.getProcessInstanceId(), "isApproved", true);</camunda:script>
+task.getProcessEngineServices().getRuntimeService().setVariable(task.getProcessInstanceId(), "isApproved", true);</camunda:script>
         </camunda:taskListener>
         <camunda:executionListener event="start">
           <camunda:script scriptFormat="JavaScript">print('STEP 4.1 - Executiong Start Event of User Task ');</camunda:script>

@@ -1,0 +1,117 @@
+<form role="form" name="taskForm" class="form-horizontal">
+  <h3>Task Details</h3>
+
+  <!-- Text Input (String) -->
+  <div class="form-group">
+    <label for="customerName" class="control-label col-md-4">Customer Name</label>
+    <div class="col-md-8">
+      <input type="text"
+             id="customerName"
+             name="customerName"
+             class="form-control"
+             cam-variable-name="customerName"
+             cam-variable-type="String"
+             required />
+    </div>
+  </div>
+
+  <!-- Number Input (Double / Integer / Long) -->
+  <div class="form-group">
+    <label for="amount" class="control-label col-md-4">Invoice Amount</label>
+    <div class="col-md-8">
+      <input type="number"
+             step="0.01"
+             id="amount"
+             name="amount"
+             class="form-control"
+             cam-variable-name="amount"
+             cam-variable-type="Double"
+             required />
+    </div>
+  </div>
+
+  <!-- Dropdown Select (String) -->
+  <div class="form-group">
+    <label for="department" class="control-label col-md-4">Department</label>
+    <div class="col-md-8">
+      <select id="department"
+              name="department"
+              class="form-control"
+              cam-variable-name="department"
+              cam-variable-type="String"
+              required>
+        <option value="">-- Select Department --</option>
+        <option value="finance">Finance</option>
+        <option value="hr">Human Resources</option>
+        <option value="it">IT Operations</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Date Input (Date) -->
+  <div class="form-group">
+    <label for="dueDate" class="control-label col-md-4">Due Date</label>
+    <div class="col-md-8">
+      <div class="input-group">
+        <input type="text"
+               id="dueDate"
+               name="dueDate"
+               class="form-control"
+               cam-variable-name="dueDate"
+               cam-variable-type="Date"
+               datepicker-popup="yyyy-MM-dd'T'HH:mm:ss"
+               is-open="dateFieldOpened" />
+        <span class="input-group-btn">
+          <button type="button"
+                  class="btn btn-default"
+                  ng-click="openDatePicker($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkbox (Boolean) -->
+  <div class="form-group">
+    <div class="col-md-offset-4 col-md-8">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"
+                 id="approved"
+                 name="approved"
+                 cam-variable-name="approved"
+                 cam-variable-type="Boolean" />
+          Approve Request
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom AngularJS / Camunda Form SDK Script -->
+  <script cam-script type="text/form-script">
+    // Datepicker toggle helper
+    $scope.openDatePicker = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.dateFieldOpened = true;
+    };
+
+    // Lifecycle hook: runs when the form is loaded
+    camForm.on('form-loaded', function() {
+      // Example: Fetch an existing process variable not bound to an HTML input
+      // camForm.variableManager.fetchVariable('someHiddenVar');
+    });
+
+    // Lifecycle hook: runs right before the form is submitted
+    camForm.on('submit', function(evt) {
+      // Example: Add custom validation or dynamically create a variable
+      // var variableManager = camForm.variableManager;
+      // variableManager.createVariable({
+      //   name: 'submittedBy',
+      //   type: 'String',
+      //   value: 'TasklistUser'
+      // });
+    });
+  </script>
+</form>

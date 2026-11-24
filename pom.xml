@@ -44,6 +44,11 @@
       <artifactId>camunda-bpm-spring-boot-starter</artifactId>
       <version>${camunda.spring.boot.starter.version}</version>
     </dependency>    
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-external-task-client</artifactId>
+      <version>${camunda.spring.boot.starter.version}</version>
+    </dependency>
     <!-- Needed for Camunda WebApp like Cockpit, Tasklist-->
     <dependency>
       <groupId>org.camunda.bpm.springboot</groupId>
